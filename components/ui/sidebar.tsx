@@ -1,20 +1,20 @@
 import Link from "next/link";
+import { LayoutGrid, Cpu, Layers3, BellRing, Settings } from "lucide-react";
+import type { IconMap, NavItem } from "@/lib/nav";
 import { NAV_LINKS } from "@/lib/nav";
-import {
-  LayoutGrid,
-  Cpu,
-  Layers3,
-  BellRing,
-  Settings,
-} from "lucide-react";
 
-const iconMap = {
+const iconMap: IconMap = {
   grid: LayoutGrid,
   chip: Cpu,
   stack: Layers3,
   alert: BellRing,
   settings: Settings,
-} as const;
+};
+
+function getIconComponent(item: NavItem) {
+  const Icon = iconMap[item.icon ?? "grid"];
+  return Icon ?? LayoutGrid;
+}
 
 export function Sidebar() {
   return (
@@ -24,7 +24,7 @@ export function Sidebar() {
       </div>
       <nav className="space-y-1">
         {NAV_LINKS.map((item) => {
-          const Icon = iconMap[item.icon ?? "grid"] ?? LayoutGrid;
+          const Icon = getIconComponent(item);
           return (
             <Link
               key={item.href}

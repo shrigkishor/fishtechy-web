@@ -1,7 +1,11 @@
+import type { LucideIcon } from "lucide-react";
+
+export type NavIcon = "grid" | "chip" | "stack" | "alert" | "settings";
+
 export type NavItem = {
   label: string;
   href: string;
-  icon?: string;
+  icon?: NavIcon;
 };
 
 export const NAV_LINKS: NavItem[] = [
@@ -11,3 +15,5 @@ export const NAV_LINKS: NavItem[] = [
   { label: "Alerts", href: "/alerts", icon: "alert" },
   { label: "Settings", href: "/settings", icon: "settings" },
 ];
+
+export type IconMap = Record<NavIcon, LucideIcon>;
