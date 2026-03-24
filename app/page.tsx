@@ -20,10 +20,10 @@ export default function HomePage() {
         <div className="mx-auto flex w-full max-w-[1920px] items-center gap-10 px-6 py-[30px] lg:px-[100px]">
           <Link href="/" className="shrink-0" aria-label="Fishtechy home">
             <Image
-              src="/figma/header-logo.png"
+              src="/figma/header-logo-real.png"
               alt="Fishtechy official logo"
-              width={267}
-              height={60}
+              width={535}
+              height={120}
               priority
               className="h-auto w-[184px] lg:w-[267.47px]"
             />
@@ -115,20 +115,22 @@ export default function HomePage() {
               />
             </div>
 
-            <div className="metric-card-inner absolute bottom-[11%] left-0 z-20 w-[79%] max-w-[402px] rounded-[20px] bg-[#202020] p-[10px] shadow-hero-card sm:bottom-[12%] sm:left-[1.5%] lg:left-[2%]">
-              <div className="flex items-center gap-[31px] rounded-[12px] px-[21px] py-[21px]">
-                <Image
-                  src="/figma/measured-fish-avatar.png"
-                  alt="Measured fish avatar"
-                  width={83}
-                  height={83}
-                  className="h-[62px] w-[62px] rounded-[8px] sm:h-[72px] sm:w-[72px] lg:h-[82.91px] lg:w-[82.91px]"
-                />
+            <div className="metric-card-inner absolute bottom-[15%] left-[-10%] z-20 w-[84%] max-w-[402px] rounded-[20px] bg-[#202020] p-[10px] shadow-hero-card sm:bottom-[16%] sm:left-[-6%] lg:left-[-16%]">
+              <div className="flex items-center gap-[24px] rounded-[12px] px-[20px] py-[18px]">
+                <div className="flex h-[62px] w-[62px] shrink-0 items-center justify-center rounded-full bg-white sm:h-[72px] sm:w-[72px] lg:h-[78px] lg:w-[78px]">
+                  <Image
+                    src="/figma/measured-fish-avatar.png"
+                    alt="Fish measured icon"
+                    width={83}
+                    height={83}
+                    className="h-[34px] w-[34px] rounded-none object-contain sm:h-[40px] sm:w-[40px] lg:h-[44px] lg:w-[44px]"
+                  />
+                </div>
                 <div>
-                  <p className="text-[1.95rem] font-normal leading-[1.5] tracking-[0] text-brand sm:text-[2.05rem] lg:text-[32px]">
+                  <p className="text-[1.9rem] font-normal leading-none tracking-[0] text-brand sm:text-[2.05rem] lg:text-[32px]">
                     124,058
                   </p>
-                  <p className="-mt-0.5 text-sm font-bold leading-5 text-[#f4f4f4] sm:text-base lg:text-[19.5px]">
+                  <p className="mt-1 text-[14px] font-bold leading-5 text-[#f4f4f4] sm:text-[17px] lg:text-[19.5px]">
                     Fish Measured
                   </p>
                 </div>
