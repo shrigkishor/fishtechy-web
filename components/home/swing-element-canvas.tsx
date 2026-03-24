@@ -63,19 +63,19 @@ function StaticFallback() {
   );
 }
 
+function checkWebGL() {
+  if (typeof document === "undefined") return true;
+  try {
+    const c = document.createElement("canvas");
+    return !!(c.getContext("webgl2") || c.getContext("webgl"));
+  } catch {
+    return false;
+  }
+}
+
 export function SwingElementCanvas() {
   const [pointer, setPointer] = useState<PointerState>({ x: 0, y: 0 });
-  const [webglSupported, setWebglSupported] = useState(true);
-
-  useEffect(() => {
-    try {
-      const c = document.createElement("canvas");
-      const supported = !!(c.getContext("webgl2") || c.getContext("webgl"));
-      setWebglSupported(supported);
-    } catch {
-      setWebglSupported(false);
-    }
-  }, []);
+  const [webglSupported] = useState(checkWebGL);
 
   const onCreated = useCallback(() => {
     /* Canvas is ready — no-op, suppression handled below */

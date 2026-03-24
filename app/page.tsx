@@ -43,7 +43,8 @@ export default function HomePage() {
                 alt="Download on the App Store"
                 width={266}
                 height={77}
-                className="h-auto w-[120px] sm:w-[150px] md:w-[180px] lg:w-[230px] xl:w-[266px]"
+                className="w-[120px] sm:w-[150px] md:w-[180px] lg:w-[230px] xl:w-[266px]"
+                style={{ height: "auto" }}
               />
             </a>
             <a
@@ -56,7 +57,8 @@ export default function HomePage() {
                 alt="Get it on Google Play"
                 width={264}
                 height={77}
-                className="h-auto w-[118px] sm:w-[148px] md:w-[178px] lg:w-[228px] xl:w-[264px]"
+                className="w-[118px] sm:w-[148px] md:w-[178px] lg:w-[228px] xl:w-[264px]"
+                style={{ height: "auto" }}
               />
             </a>
           </div>
@@ -143,7 +145,8 @@ export default function HomePage() {
               alt="Download on the App Store"
               width={247}
               height={71}
-              className="h-auto w-[140px] sm:w-[180px] lg:w-[220px] xl:w-[247px]"
+              className="w-[140px] sm:w-[180px] lg:w-[220px] xl:w-[247px]"
+              style={{ height: "auto" }}
             />
           </a>
           <a
@@ -156,7 +159,8 @@ export default function HomePage() {
               alt="Get it on Google Play"
               width={245}
               height={71}
-              className="h-auto w-[138px] sm:w-[178px] lg:w-[218px] xl:w-[245px]"
+              className="w-[138px] sm:w-[178px] lg:w-[218px] xl:w-[245px]"
+              style={{ height: "auto" }}
             />
           </a>
         </div>
