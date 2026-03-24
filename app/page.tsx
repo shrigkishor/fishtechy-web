@@ -61,11 +61,17 @@ export default function HomePage() {
           </div>
 
           <div className="mt-4 space-y-5 sm:mt-6 lg:mt-[18px]">
-            <h1 className="font-display text-[3.3rem] font-bold leading-[0.91] tracking-[-0.05em] text-white sm:text-[4.85rem] lg:text-[5.6rem] xl:text-[6rem]">
+            <h1
+              className="font-display font-bold leading-[0.91] tracking-[-0.05em] text-white"
+              style={{ fontSize: "clamp(3rem, 6vw + 0.5rem, 6rem)" }}
+            >
               <span className="block">Measuring Fish</span>
               <span className="block text-brand">Reinvented</span>
             </h1>
-            <p className="font-body-alt text-base font-semibold tracking-[-0.01em] text-white/88 sm:text-[1.25rem] lg:text-[1.28rem]">
+            <p
+              className="font-body-alt font-semibold tracking-[-0.01em] text-white/88"
+              style={{ fontSize: "clamp(0.95rem, 1vw + 0.5rem, 1.28rem)" }}
+            >
               Available for iOS &amp; Android
             </p>
           </div>
@@ -81,7 +87,7 @@ export default function HomePage() {
                 alt="Download on the App Store"
                 width={266}
                 height={77}
-                className="h-auto w-[182px] sm:w-[222px] lg:w-[266px]"
+                className="h-auto w-[140px] sm:w-[182px] md:w-[222px] lg:w-[266px]"
               />
             </a>
             <a
@@ -94,9 +100,43 @@ export default function HomePage() {
                 alt="Get it on Google Play"
                 width={264}
                 height={77}
-                className="h-auto w-[180px] sm:w-[220px] lg:w-[264px]"
+                className="h-auto w-[138px] sm:w-[180px] md:w-[220px] lg:w-[264px]"
               />
             </a>
+
+            <div className="metric-card-inner max-w-[280px] rounded-[20px] bg-[#202020] p-[10px] shadow-hero-card sm:max-w-[320px] md:max-w-[340px] lg:max-w-[382px]">
+              <div className="flex items-center gap-[14px] rounded-[12px] px-[14px] py-[12px] sm:gap-[18px] sm:px-[16px] sm:py-[14px] md:gap-[22px] md:px-[20px] md:py-[16px] lg:gap-[24px] lg:px-[20px] lg:py-[18px]">
+                <div className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-white sm:h-[54px] sm:w-[54px] md:h-[64px] md:w-[64px] lg:h-[78px] lg:w-[78px]">
+                  <Image
+                    src="/figma/measured-fish-avatar.png"
+                    alt="Fish measured icon"
+                    width={83}
+                    height={83}
+                    className="rounded-none object-contain"
+                    style={{
+                      width: "clamp(22px, 3vw + 4px, 44px)",
+                      height: "clamp(22px, 3vw + 4px, 44px)",
+                    }}
+                  />
+                </div>
+                <div>
+                  <p
+                    className="font-display font-normal leading-none tracking-[0] text-brand"
+                    style={{ fontSize: "clamp(1.2rem, 2vw + 0.3rem, 2rem)" }}
+                  >
+                    124,058
+                  </p>
+                  <p
+                    className="font-label mt-0.5 font-bold leading-4 text-[#f4f4f4] sm:mt-1 sm:leading-5"
+                    style={{
+                      fontSize: "clamp(0.65rem, 1vw + 0.2rem, 1.22rem)",
+                    }}
+                  >
+                    Fish Measured
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -113,28 +153,6 @@ export default function HomePage() {
                 priority
                 className="relative z-10 h-auto max-h-[54svh] w-auto max-w-full drop-shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:max-h-[62svh] lg:max-h-[72svh] xl:max-h-[76svh]"
               />
-            </div>
-
-            <div className="metric-card-inner absolute bottom-[8%] left-[-2%] z-20 w-[92%] max-w-[312px] rounded-[20px] bg-[#202020] p-[10px] shadow-hero-card sm:bottom-[13%] sm:left-[-1%] sm:max-w-[360px] lg:bottom-[14%] lg:left-[-18%] lg:max-w-[382px] xl:max-w-[402px]">
-              <div className="flex items-center gap-[18px] rounded-[12px] px-[16px] py-[15px] sm:gap-[24px] sm:px-[20px] sm:py-[18px]">
-                <div className="flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-full bg-white sm:h-[72px] sm:w-[72px] lg:h-[78px] lg:w-[78px]">
-                  <Image
-                    src="/figma/measured-fish-avatar.png"
-                    alt="Fish measured icon"
-                    width={83}
-                    height={83}
-                    className="h-[28px] w-[28px] rounded-none object-contain sm:h-[40px] sm:w-[40px] lg:h-[44px] lg:w-[44px]"
-                  />
-                </div>
-                <div>
-                  <p className="font-display text-[1.55rem] font-normal leading-none tracking-[0] text-brand sm:text-[2.05rem] lg:text-[32px]">
-                    124,058
-                  </p>
-                  <p className="font-label mt-0.5 text-[12px] font-bold leading-4 text-[#f4f4f4] sm:mt-1 sm:text-[17px] sm:leading-5 lg:text-[19.5px]">
-                    Fish Measured
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
