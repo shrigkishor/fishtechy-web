@@ -58,7 +58,7 @@ body {
 }
 
 .hero-grid {
-  min-height: calc(100vh - 88px);
+  min-height: calc(100svh - 84px);
 }
 
 .hero-phone-glow {
@@ -103,11 +103,17 @@ body {
 
 @media (max-width: 1024px) {
   .hero-grid {
-    min-height: auto;
+    min-height: calc(100svh - 72px);
   }
 
   .hero-phone-glow {
     inset: 12% 2% 10% 10%;
     filter: blur(24px);
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero-grid {
+    min-height: calc(100svh - 92px);
   }
 }

@@ -17,7 +17,7 @@ export default function HomePage() {
   return (
     <main id="home" className="relative overflow-hidden">
       <header className="fixed inset-x-0 top-0 z-30 bg-background">
-        <div className="mx-auto flex w-full max-w-[1920px] items-center gap-10 px-6 py-[30px] lg:px-[100px]">
+        <div className="mx-auto flex w-full max-w-[1920px] items-center gap-6 px-5 py-4 sm:px-6 lg:gap-10 lg:px-[100px] lg:py-5">
           <Link href="/" className="shrink-0" aria-label="Fishtechy home">
             <Image
               src="/figma/header-logo-real.png"
@@ -54,7 +54,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      <section className="hero-grid mx-auto grid w-full max-w-[1380px] items-center gap-12 px-5 pb-10 pt-[132px] sm:px-8 lg:grid-cols-[minmax(0,1.06fr)_minmax(430px,0.94fr)] lg:px-10 lg:pb-16 lg:pt-[150px]">
+      <section className="hero-grid mx-auto grid w-full max-w-[1380px] items-center gap-8 px-5 pb-6 pt-[96px] sm:px-8 sm:pt-[108px] lg:grid-cols-[minmax(0,1.02fr)_minmax(390px,0.98fr)] lg:gap-10 lg:px-10 lg:pb-8 lg:pt-[118px] xl:pt-[124px]">
         <div className="relative z-10 max-w-[760px] lg:pb-10">
           <div className="mt-8 sm:mt-9 lg:mt-10">
             <SwingElementCanvas />
@@ -101,21 +101,21 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-[560px] pt-4 sm:max-w-[620px] lg:max-w-[720px] lg:pt-0">
+          <div className="relative w-full max-w-[440px] pt-2 sm:max-w-[500px] lg:max-w-[560px] lg:pt-0 xl:max-w-[620px]">
             <div className="hero-phone-glow" />
 
-            <div className="relative ml-auto w-[74%] sm:w-[69%] lg:w-[71%] xl:w-[69%]">
+            <div className="relative ml-auto flex w-[68%] justify-end sm:w-[64%] lg:w-[66%] xl:w-[64%]">
               <Image
                 src="/figma/hero-phone.png"
                 alt="Fishtechy app preview on a mobile device"
                 width={712}
                 height={1472}
                 priority
-                className="relative z-10 h-auto w-full drop-shadow-[0_30px_80px_rgba(0,0,0,0.45)]"
+                className="relative z-10 h-auto max-h-[58svh] w-auto max-w-full drop-shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:max-h-[62svh] lg:max-h-[72svh] xl:max-h-[76svh]"
               />
             </div>
 
-            <div className="metric-card-inner absolute bottom-[15%] left-[-10%] z-20 w-[84%] max-w-[402px] rounded-[20px] bg-[#202020] p-[10px] shadow-hero-card sm:bottom-[16%] sm:left-[-6%] lg:left-[-16%]">
+            <div className="metric-card-inner absolute bottom-[12%] left-[-4%] z-20 w-[88%] max-w-[338px] rounded-[20px] bg-[#202020] p-[10px] shadow-hero-card sm:bottom-[13%] sm:left-[-1%] sm:max-w-[360px] lg:bottom-[14%] lg:left-[-18%] lg:max-w-[382px] xl:max-w-[402px]">
               <div className="flex items-center gap-[24px] rounded-[12px] px-[20px] py-[18px]">
                 <div className="flex h-[62px] w-[62px] shrink-0 items-center justify-center rounded-full bg-white sm:h-[72px] sm:w-[72px] lg:h-[78px] lg:w-[78px]">
                   <Image
