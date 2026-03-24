@@ -1,4 +1,9 @@
 import { ArrowRight, ShieldCheck, Waves, Fish, BarChart3 } from "lucide-react";
+import { ActivityBoard } from "@/components/home/activity-board";
+import { FleetReadiness } from "@/components/home/fleet-readiness";
+import { AlertsPanel } from "@/components/ui/alerts-panel";
+import { StatCard } from "@/components/ui/stat-card";
+import { metricCards } from "@/lib/mock-data";
 
 const highlights = [
   { label: "Active devices", value: "128" },
@@ -80,6 +85,20 @@ export default function HomePage() {
           );
         })}
       </section>
+
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {metricCards.map((metric) => (
+          <StatCard key={metric.label} {...metric} />
+        ))}
+      </section>
+
+      <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.55fr)_360px]">
+        <div className="space-y-4">
+          <FleetReadiness />
+          <ActivityBoard />
+        </div>
+        <AlertsPanel />
+      </div>
     </div>
   );
 }
