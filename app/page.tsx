@@ -32,13 +32,6 @@ export default function HomePage() {
 
       <section className="hero-grid mx-auto grid w-full max-w-[1380px] items-center gap-12 px-5 pb-10 pt-4 sm:px-8 lg:grid-cols-[minmax(0,1.06fr)_minmax(430px,0.94fr)] lg:px-10 lg:pb-16 lg:pt-8">
         <div className="relative z-10 max-w-[760px] lg:pb-10">
-          <div className="relative inline-flex">
-            <span className="absolute -left-2.5 -top-3.5 h-[15px] w-[15px] rounded-full bg-brand shadow-[0_0_0_6px_rgba(238,63,36,0.15)]" />
-            <span className="rotate-[-12deg] rounded-full border border-white/12 bg-[#0d0b0b] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80 shadow-[0_8px_24px_rgba(0,0,0,0.35)]">
-              Patent Pending
-            </span>
-          </div>
-
           <div className="mt-8 sm:mt-9 lg:mt-10">
             <SwingElementCanvas />
           </div>
