@@ -61,11 +61,11 @@ export default function HomePage() {
           </div>
 
           <div className="mt-4 space-y-5 sm:mt-6 lg:mt-[18px]">
-            <h1 className="text-[3.3rem] font-bold leading-[0.91] tracking-[-0.05em] text-white sm:text-[4.85rem] lg:text-[5.6rem] xl:text-[6rem]">
+            <h1 className="font-display text-[3.3rem] font-bold leading-[0.91] tracking-[-0.05em] text-white sm:text-[4.85rem] lg:text-[5.6rem] xl:text-[6rem]">
               <span className="block">Measuring Fish</span>
               <span className="block text-brand">Reinvented</span>
             </h1>
-            <p className="text-base font-semibold tracking-[-0.01em] text-white/88 sm:text-[1.25rem] lg:text-[1.28rem]">
+            <p className="font-body-alt text-base font-semibold tracking-[-0.01em] text-white/88 sm:text-[1.25rem] lg:text-[1.28rem]">
               Available for iOS &amp; Android
             </p>
           </div>
@@ -130,7 +130,7 @@ export default function HomePage() {
                   <p className="text-[1.9rem] font-normal leading-none tracking-[0] text-brand sm:text-[2.05rem] lg:text-[32px]">
                     124,058
                   </p>
-                  <p className="mt-1 text-[14px] font-bold leading-5 text-[#f4f4f4] sm:text-[17px] lg:text-[19.5px]">
+                  <p className="font-label mt-1 text-[14px] font-bold leading-5 text-[#f4f4f4] sm:text-[17px] lg:text-[19.5px]">
                     Fish Measured
                   </p>
                 </div>
