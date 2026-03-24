@@ -100,37 +100,37 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="relative z-10 flex justify-center lg:justify-end">
+        <div className="relative z-10 mt-2 flex justify-center lg:mt-0 lg:justify-end">
           <div className="relative w-full max-w-[440px] pt-2 sm:max-w-[500px] lg:max-w-[560px] lg:pt-0 xl:max-w-[620px]">
             <div className="hero-phone-glow" />
 
-            <div className="relative ml-auto flex w-[68%] justify-end sm:w-[64%] lg:w-[66%] xl:w-[64%]">
+            <div className="relative ml-auto flex w-[72%] justify-end sm:w-[64%] lg:w-[66%] xl:w-[64%]">
               <Image
                 src="/figma/hero-phone.png"
                 alt="Fishtechy app preview on a mobile device"
                 width={712}
                 height={1472}
                 priority
-                className="relative z-10 h-auto max-h-[58svh] w-auto max-w-full drop-shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:max-h-[62svh] lg:max-h-[72svh] xl:max-h-[76svh]"
+                className="relative z-10 h-auto max-h-[54svh] w-auto max-w-full drop-shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:max-h-[62svh] lg:max-h-[72svh] xl:max-h-[76svh]"
               />
             </div>
 
-            <div className="metric-card-inner absolute bottom-[12%] left-[-4%] z-20 w-[88%] max-w-[338px] rounded-[20px] bg-[#202020] p-[10px] shadow-hero-card sm:bottom-[13%] sm:left-[-1%] sm:max-w-[360px] lg:bottom-[14%] lg:left-[-18%] lg:max-w-[382px] xl:max-w-[402px]">
-              <div className="flex items-center gap-[24px] rounded-[12px] px-[20px] py-[18px]">
-                <div className="flex h-[62px] w-[62px] shrink-0 items-center justify-center rounded-full bg-white sm:h-[72px] sm:w-[72px] lg:h-[78px] lg:w-[78px]">
+            <div className="metric-card-inner absolute bottom-[8%] left-[-2%] z-20 w-[92%] max-w-[312px] rounded-[20px] bg-[#202020] p-[10px] shadow-hero-card sm:bottom-[13%] sm:left-[-1%] sm:max-w-[360px] lg:bottom-[14%] lg:left-[-18%] lg:max-w-[382px] xl:max-w-[402px]">
+              <div className="flex items-center gap-[18px] rounded-[12px] px-[16px] py-[15px] sm:gap-[24px] sm:px-[20px] sm:py-[18px]">
+                <div className="flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-full bg-white sm:h-[72px] sm:w-[72px] lg:h-[78px] lg:w-[78px]">
                   <Image
                     src="/figma/measured-fish-avatar.png"
                     alt="Fish measured icon"
                     width={83}
                     height={83}
-                    className="h-[34px] w-[34px] rounded-none object-contain sm:h-[40px] sm:w-[40px] lg:h-[44px] lg:w-[44px]"
+                    className="h-[28px] w-[28px] rounded-none object-contain sm:h-[40px] sm:w-[40px] lg:h-[44px] lg:w-[44px]"
                   />
                 </div>
                 <div>
-                  <p className="text-[1.9rem] font-normal leading-none tracking-[0] text-brand sm:text-[2.05rem] lg:text-[32px]">
+                  <p className="font-display text-[1.55rem] font-normal leading-none tracking-[0] text-brand sm:text-[2.05rem] lg:text-[32px]">
                     124,058
                   </p>
-                  <p className="font-label mt-1 text-[14px] font-bold leading-5 text-[#f4f4f4] sm:text-[17px] lg:text-[19.5px]">
+                  <p className="font-label mt-0.5 text-[12px] font-bold leading-4 text-[#f4f4f4] sm:mt-1 sm:text-[17px] sm:leading-5 lg:text-[19.5px]">
                     Fish Measured
                   </p>
                 </div>
