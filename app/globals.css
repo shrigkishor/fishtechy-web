@@ -74,6 +74,18 @@ body {
   pointer-events: none;
 }
 
+.swing-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swing-canvas {
+    transform: none !important;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero-grid {
     min-height: auto;

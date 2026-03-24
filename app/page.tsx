@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SwingElementCanvas } from "@/components/home/swing-element-canvas";
 
 const navItems = ["Home", "About", "Features", "FAQ"];
 
@@ -39,14 +40,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-8 sm:mt-9 lg:mt-10">
-            <Image
-              src="/figma/swing-element.png"
-              alt="Fishtechy swing element"
-              width={196}
-              height={131}
-              priority
-              className="h-auto w-[116px] sm:w-[146px] lg:w-[196px]"
-            />
+            <SwingElementCanvas />
           </div>
 
           <div className="mt-4 space-y-5 sm:mt-6 lg:mt-[18px]">
