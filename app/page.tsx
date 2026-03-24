@@ -2,35 +2,59 @@ import Image from "next/image";
 import Link from "next/link";
 import { SwingElementCanvas } from "@/components/home/swing-element-canvas";
 
-const navItems = ["Home", "About", "Features", "FAQ"];
+const navItems = [
+  { label: "Home", href: "#home", active: true },
+  { label: "Buy Now", href: "#buy-now" },
+  { label: "Find a Store", href: "#find-a-store" },
+  { label: "Fishtechy Contests", href: "#fishtechy-contests" },
+  { label: "How it Works", href: "#how-it-works" },
+  { label: "SMART Log", href: "#smart-log" },
+  { label: "Measuring For Science", href: "#measuring-for-science" },
+  { label: "Vendor Portal", href: "#vendor-portal" },
+];
 
 export default function HomePage() {
   return (
-    <main className="relative overflow-hidden">
-      <header className="relative z-20 mx-auto flex w-full max-w-[1380px] items-center justify-between px-5 py-5 sm:px-8 lg:px-10 lg:py-7">
-        <Link href="/" className="text-[1.35rem] font-semibold tracking-[-0.03em] text-white sm:text-[1.65rem]">
-          Fishtechy
-        </Link>
+    <main id="home" className="relative overflow-hidden">
+      <header className="fixed inset-x-0 top-0 z-30 bg-background">
+        <div className="mx-auto flex w-full max-w-[1920px] items-center gap-10 px-6 py-[30px] lg:px-[100px]">
+          <Link href="/" className="shrink-0" aria-label="Fishtechy home">
+            <Image
+              src="/figma/header-logo.png"
+              alt="Fishtechy official logo"
+              width={267}
+              height={60}
+              priority
+              className="h-auto w-[184px] lg:w-[267.47px]"
+            />
+          </Link>
 
-        <nav className="hidden items-center gap-9 text-[15px] font-medium text-white/78 lg:flex">
-          {navItems.map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="transition hover:text-white">
-              {item}
-            </a>
-          ))}
-        </nav>
+          <nav className="hidden min-w-0 flex-1 items-center overflow-x-auto whitespace-nowrap lg:flex">
+            <div className="flex items-center gap-6 px-[15px] py-[15px] text-[20px] font-semibold text-[#f4f4f4]">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={item.active ? "text-brand" : "text-[#f4f4f4]"}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </nav>
 
-        <div className="flex items-center gap-3">
-          <button className="hidden h-11 items-center justify-center rounded-full border border-brand px-5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white sm:inline-flex">
-            Log in
-          </button>
-          <button className="inline-flex h-11 items-center justify-center rounded-full bg-accent px-5 text-sm font-semibold text-white transition hover:brightness-110">
-            Sign Up
-          </button>
+          <div className="ml-auto flex items-center gap-[19px]">
+            <button className="inline-flex h-[40px] w-[106.2px] shrink-0 items-center justify-center rounded-[5px] border border-[#144b83] bg-[#144b83] text-[16px] leading-4 font-medium text-white transition hover:brightness-110">
+              Sign Up
+            </button>
+            <button className="inline-flex h-10 w-[106.2px] items-center justify-center rounded-[5px] border border-brand bg-transparent text-base font-medium text-white transition hover:bg-brand/10">
+              Log in
+            </button>
+          </div>
         </div>
       </header>
 
-      <section className="hero-grid mx-auto grid w-full max-w-[1380px] items-center gap-12 px-5 pb-10 pt-4 sm:px-8 lg:grid-cols-[minmax(0,1.06fr)_minmax(430px,0.94fr)] lg:px-10 lg:pb-16 lg:pt-8">
+      <section className="hero-grid mx-auto grid w-full max-w-[1380px] items-center gap-12 px-5 pb-10 pt-[132px] sm:px-8 lg:grid-cols-[minmax(0,1.06fr)_minmax(430px,0.94fr)] lg:px-10 lg:pb-16 lg:pt-[150px]">
         <div className="relative z-10 max-w-[760px] lg:pb-10">
           <div className="mt-8 sm:mt-9 lg:mt-10">
             <SwingElementCanvas />
@@ -92,19 +116,19 @@ export default function HomePage() {
             </div>
 
             <div className="metric-card-inner absolute bottom-[11%] left-0 z-20 w-[79%] max-w-[402px] rounded-[20px] bg-[#202020] p-[10px] shadow-hero-card sm:bottom-[12%] sm:left-[1.5%] lg:left-[2%]">
-              <div className="flex items-center gap-4 rounded-[12px] px-[22px] py-[20px]">
+              <div className="flex items-center gap-[31px] rounded-[12px] px-[21px] py-[21px]">
                 <Image
                   src="/figma/measured-fish-avatar.png"
                   alt="Measured fish avatar"
                   width={83}
                   height={83}
-                  className="h-[62px] w-[62px] rounded-[8px] sm:h-[72px] sm:w-[72px] lg:h-[82px] lg:w-[82px]"
+                  className="h-[62px] w-[62px] rounded-[8px] sm:h-[72px] sm:w-[72px] lg:h-[82.91px] lg:w-[82.91px]"
                 />
                 <div>
-                  <p className="text-[1.95rem] font-bold leading-none tracking-[-0.03em] text-brand sm:text-[2.35rem] lg:text-[3rem]">
+                  <p className="text-[1.95rem] font-normal leading-[1.5] tracking-[0] text-brand sm:text-[2.05rem] lg:text-[32px]">
                     124,058
                   </p>
-                  <p className="mt-2 text-sm font-medium text-white/86 sm:text-base lg:text-[1.25rem]">
+                  <p className="-mt-0.5 text-sm font-bold leading-5 text-[#f4f4f4] sm:text-base lg:text-[19.5px]">
                     Fish Measured
                   </p>
                 </div>
