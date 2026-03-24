@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
-import { AppShell } from "@/components/shared/app-shell";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
@@ -14,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fishtechy Web",
-  description: "Fishtechy web experience built with Next.js, Tailwind CSS, and reusable components.",
+  title: "Fishtechy",
+  description: "Fishtechy homepage implemented from the Figma web app design.",
 };
 
 export default function RootLayout({
@@ -24,13 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full bg-background text-foreground">
-        <AppShell>{children}</AppShell>
-      </body>
+    <html lang="en" className={`${outfit.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="min-h-full bg-background text-foreground">{children}</body>
     </html>
   );
 }
