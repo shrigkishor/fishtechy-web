@@ -1,13 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
+import { useAuth } from "@/lib/auth-context";
+import { emailLoginMutation } from "@/lib/queries/auth-queries";
 
-type View = "signup" | "bfd-token" | "profile-setup";
+type View = "signup" | "login" | "bfd-token" | "profile-setup";
 
-export function SignUpModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [view, setView] = useState<View>("signup");
-  const close = useCallback(() => { onClose(); setView("signup"); }, [onClose]);
+export function SignUpModal({ open, onClose, initialView = "signup" }: { open: boolean; onClose: () => void; initialView?: "signup" | "login" }) {
+  const [view, setView] = useState<View>(initialView);
+  const close = useCallback(() => { onClose(); setView(initialView); }, [onClose, initialView]);
 
   useEffect(() => {
     if (!open) return;
@@ -22,6 +26,7 @@ export function SignUpModal({ open, onClose }: { open: boolean; onClose: () => v
   const handleBack = () => {
     if (view === "profile-setup") setView("bfd-token");
     else if (view === "bfd-token") setView("signup");
+    else if (view === "login") setView("signup");
     else close();
   };
 
@@ -39,7 +44,8 @@ export function SignUpModal({ open, onClose }: { open: boolean; onClose: () => v
         </svg>
       </button>
 
-      {view === "signup" && <SignUpView onBfd={() => setView("bfd-token")} />}
+      {view === "signup" && <SignUpView onBfd={() => setView("bfd-token")} onLogin={() => setView("login")} />}
+      {view === "login" && <LoginView onSignUp={() => setView("signup")} />}
       {view === "bfd-token" && <BfdTokenView onVerify={() => setView("profile-setup")} />}
       {view === "profile-setup" && <ProfileSetupView />}
     </div>
@@ -48,7 +54,27 @@ export function SignUpModal({ open, onClose }: { open: boolean; onClose: () => v
 
 /* ─── Sign Up View ─── */
 
-function SignUpView({ onBfd }: { onBfd: () => void }) {
+function SignUpView({ onBfd, onLogin }: { onBfd: () => void; onLogin: () => void }) {
+  const [error, setError] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const { login } = useAuth();
+  const router = useRouter();
+
+  const emailMutation = useMutation({
+    ...emailLoginMutation,
+    onSuccess: async (data) => {
+      await login(data.access_token, data.refresh_token);
+      router.push("/feed");
+    },
+    onError: (err) => {
+      setError(err instanceof Error ? err.message : "Login failed");
+    },
+  });
+
+  const loading = emailMutation.isPending;
+
   return (
     <div className="relative z-10 mx-4 my-8 flex w-full max-w-[521px] flex-col gap-5 rounded-[10px] bg-[#0a0a0a] px-5 py-7 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] sm:px-10 sm:py-[42px]">
       <div className="flex flex-col gap-6 sm:gap-[30px]">
@@ -61,8 +87,18 @@ function SignUpView({ onBfd }: { onBfd: () => void }) {
           </p>
         </div>
 
+        {error && (
+          <p className="rounded-lg bg-red-500/10 px-4 py-2 text-center font-display text-[13px] text-red-400 sm:text-[14px]">
+            {error}
+          </p>
+        )}
+
         <div className="flex flex-col gap-3 sm:gap-5">
-          <button className="flex h-[46px] items-center justify-center gap-2.5 rounded-[10px] bg-[#28282b] font-display text-[15px] font-semibold text-[#f5f5f5] transition-colors hover:bg-[#333336] sm:h-[54px] sm:text-[18px]">
+          <a
+            href="/api/auth/google/start"
+            onClick={() => setError(null)}
+            className="flex h-[46px] items-center justify-center gap-2.5 rounded-[10px] bg-[#28282b] font-display text-[15px] font-semibold text-[#f5f5f5] transition-colors hover:bg-[#333336] sm:h-[54px] sm:text-[18px]"
+          >
             <svg width="20" height="20" viewBox="0 0 21 21" fill="none" className="shrink-0">
               <path d="M19.305 10.742c0-.7-.057-1.2-.18-1.726H10.5v3.131h5.05c-.102.841-.652 2.108-1.875 2.96l-.017.114 2.722 2.11.189.019c1.731-1.6 2.731-3.953 2.731-6.608" fill="#4285F4" />
               <path d="M10.5 19.5c2.498 0 4.595-.823 6.127-2.243l-2.92-2.264c-.78.545-1.83.925-3.207.925-2.447 0-4.523-1.618-5.264-3.855l-.108.009-2.83 2.19-.037.103C3.683 17.323 6.827 19.5 10.5 19.5" fill="#34A853" />
@@ -70,7 +106,7 @@ function SignUpView({ onBfd }: { onBfd: () => void }) {
               <path d="M10.5 4.582c1.737 0 2.909.75 3.576 1.378l2.61-2.549C15.084 1.891 12.997.75 10.5.75 6.827.75 3.683 2.927 2.276 5.89l2.95 2.297c.752-2.236 2.827-3.605 5.274-3.605" fill="#EB4335" />
             </svg>
             Login with Google
-          </button>
+          </a>
 
           <button className="flex h-[46px] items-center justify-center gap-2.5 rounded-[10px] bg-[#28282b] font-display text-[15px] font-semibold text-[#f5f5f5] transition-colors hover:bg-[#333336] sm:h-[54px] sm:text-[18px]">
             <svg width="20" height="20" viewBox="0 0 21 21" fill="white" className="shrink-0">
@@ -101,16 +137,40 @@ function SignUpView({ onBfd }: { onBfd: () => void }) {
           <div className="h-px flex-1 bg-[#404040]" />
         </div>
 
-        <input
-          type="email"
-          placeholder="Email*"
-          className="h-[46px] rounded-[10px] border border-[#333] bg-[#1a1a1a] px-5 py-3 font-display text-[15px] text-white placeholder:text-[#737373] outline-none transition-colors focus:border-[#60a5fa] sm:h-[54px] sm:text-[18px]"
-        />
+        <div className="flex flex-col gap-3">
+          <input
+            type="email"
+            placeholder="Email*"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="h-[46px] rounded-[10px] border border-[#333] bg-[#1a1a1a] px-5 py-3 font-display text-[15px] text-white placeholder:text-[#737373] outline-none transition-colors focus:border-[#60a5fa] sm:h-[54px] sm:text-[18px]"
+          />
+          {showPassword && (
+            <input
+              type="password"
+              placeholder="Password*"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="h-[46px] rounded-[10px] border border-[#333] bg-[#1a1a1a] px-5 py-3 font-display text-[15px] text-white placeholder:text-[#737373] outline-none transition-colors focus:border-[#60a5fa] sm:h-[54px] sm:text-[18px]"
+            />
+          )}
+        </div>
       </div>
 
       <div className="flex flex-col items-center gap-6 sm:gap-10">
-        <button className="flex h-[46px] w-full items-center justify-center rounded-[10px] bg-[#004c8f] font-display text-[15px] text-white transition-colors hover:bg-[#005bab] sm:h-[54px] sm:text-[18px]">
-          Continue
+        <button
+          disabled={loading || (!showPassword ? !email.trim() : !password.trim())}
+          onClick={() => {
+            if (!showPassword) {
+              setShowPassword(true);
+              return;
+            }
+            setError(null);
+            emailMutation.mutate({ email, password });
+          }}
+          className="flex h-[46px] w-full items-center justify-center rounded-[10px] bg-[#004c8f] font-display text-[15px] text-white transition-colors hover:bg-[#005bab] disabled:opacity-50 sm:h-[54px] sm:text-[18px]"
+        >
+          {loading ? "Logging in..." : showPassword ? "Login" : "Continue"}
         </button>
 
         <p className="text-center font-display text-[13px] leading-normal text-[#737373] sm:text-[16px]">
@@ -122,7 +182,115 @@ function SignUpView({ onBfd }: { onBfd: () => void }) {
 
         <p className="text-center font-display text-[15px] text-[#737373] sm:text-[18px]">
           Already have account?{" "}
-          <a href="#" className="text-[#60a5fa] hover:underline">Log In</a>
+          <button onClick={onLogin} className="text-[#60a5fa] hover:underline">Log In</button>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Login View ─── */
+
+function LoginView({ onSignUp }: { onSignUp: () => void }) {
+  const [error, setError] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const router = useRouter();
+
+  const emailMutation = useMutation({
+    ...emailLoginMutation,
+    onSuccess: async (data) => {
+      await login(data.access_token, data.refresh_token);
+      router.push("/feed");
+    },
+    onError: (err) => {
+      setError(err instanceof Error ? err.message : "Login failed");
+    },
+  });
+
+  const loading = emailMutation.isPending;
+
+  return (
+    <div className="relative z-10 mx-4 my-8 flex w-full max-w-[521px] flex-col gap-5 rounded-[10px] bg-[#0a0a0a] px-5 py-7 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] sm:px-10 sm:py-[42px]">
+      <div className="flex flex-col gap-6 sm:gap-[30px]">
+        <div className="flex flex-col gap-4 text-center sm:gap-5">
+          <h2 className="font-display text-[26px] font-bold text-white sm:text-[36px]">
+            Log In
+          </h2>
+          <p className="font-display text-[14px] leading-normal text-[#d4d4d4] sm:text-[18px]">
+            Welcome back! Sign in to your account.
+          </p>
+        </div>
+
+        {error && (
+          <p className="rounded-lg bg-red-500/10 px-4 py-2 text-center font-display text-[13px] text-red-400 sm:text-[14px]">
+            {error}
+          </p>
+        )}
+
+        <div className="flex flex-col gap-3 sm:gap-5">
+          <a
+            href="/api/auth/google/start"
+            onClick={() => setError(null)}
+            className="flex h-[46px] items-center justify-center gap-2.5 rounded-[10px] bg-[#28282b] font-display text-[15px] font-semibold text-[#f5f5f5] transition-colors hover:bg-[#333336] sm:h-[54px] sm:text-[18px]"
+          >
+            <svg width="20" height="20" viewBox="0 0 21 21" fill="none" className="shrink-0">
+              <path d="M19.305 10.742c0-.7-.057-1.2-.18-1.726H10.5v3.131h5.05c-.102.841-.652 2.108-1.875 2.96l-.017.114 2.722 2.11.189.019c1.731-1.6 2.731-3.953 2.731-6.608" fill="#4285F4" />
+              <path d="M10.5 19.5c2.498 0 4.595-.823 6.127-2.243l-2.92-2.264c-.78.545-1.83.925-3.207.925-2.447 0-4.523-1.618-5.264-3.855l-.108.009-2.83 2.19-.037.103C3.683 17.323 6.827 19.5 10.5 19.5" fill="#34A853" />
+              <path d="M5.236 12.063a5.62 5.62 0 0 1-.306-1.813c0-.631.112-1.243.295-1.813l-.005-.121L2.37 6.095l-.094.045A9.26 9.26 0 0 0 1.29 10.25c0 1.494.361 2.905.985 4.11l2.96-2.297" fill="#FBBC05" />
+              <path d="M10.5 4.582c1.737 0 2.909.75 3.576 1.378l2.61-2.549C15.084 1.891 12.997.75 10.5.75 6.827.75 3.683 2.927 2.276 5.89l2.95 2.297c.752-2.236 2.827-3.605 5.274-3.605" fill="#EB4335" />
+            </svg>
+            Login with Google
+          </a>
+
+          <button className="flex h-[46px] items-center justify-center gap-2.5 rounded-[10px] bg-[#28282b] font-display text-[15px] font-semibold text-[#f5f5f5] transition-colors hover:bg-[#333336] sm:h-[54px] sm:text-[18px]">
+            <svg width="20" height="20" viewBox="0 0 21 21" fill="white" className="shrink-0">
+              <path d="M14.94 0c.14 1.06-.31 2.12-1.01 2.9-.71.78-1.83 1.39-2.94 1.31-.16-1.04.38-2.14 1.01-2.82.72-.78 1.96-1.35 2.94-1.39zM18.34 15.36c-.44 1.01-.65 1.46-1.22 2.36-.79 1.25-1.91 2.81-3.29 2.82-1.23.02-1.55-.8-3.22-.79-1.67.01-2.02.81-3.25.8-1.38-.02-2.44-1.4-3.23-2.65C2.1 14.45 1.97 10.35 3.54 8.2c1.11-1.52 2.87-2.42 4.52-2.42 1.49 0 2.43.81 3.67.81 1.2 0 1.93-.81 3.66-.81 1.47 0 3.03.8 4.14 2.18-3.63 1.99-3.04 7.17.81 8.4z" />
+            </svg>
+            Login with Apple
+          </button>
+        </div>
+
+        <div className="flex items-center gap-2.5 py-1.5 sm:py-3.5">
+          <div className="h-px flex-1 bg-[#404040]" />
+          <span className="font-display text-[15px] text-[#737373] sm:text-[18px]">OR</span>
+          <div className="h-px flex-1 bg-[#404040]" />
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <input
+            type="email"
+            placeholder="Email*"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="h-[46px] rounded-[10px] border border-[#333] bg-[#1a1a1a] px-5 py-3 font-display text-[15px] text-white placeholder:text-[#737373] outline-none transition-colors focus:border-[#60a5fa] sm:h-[54px] sm:text-[18px]"
+          />
+          <input
+            type="password"
+            placeholder="Password*"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="h-[46px] rounded-[10px] border border-[#333] bg-[#1a1a1a] px-5 py-3 font-display text-[15px] text-white placeholder:text-[#737373] outline-none transition-colors focus:border-[#60a5fa] sm:h-[54px] sm:text-[18px]"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center gap-6 sm:gap-10">
+        <button
+          disabled={loading || !email.trim() || !password.trim()}
+          onClick={() => {
+            setError(null);
+            emailMutation.mutate({ email, password });
+          }}
+          className="flex h-[46px] w-full items-center justify-center rounded-[10px] bg-[#004c8f] font-display text-[15px] text-white transition-colors hover:bg-[#005bab] disabled:opacity-50 sm:h-[54px] sm:text-[18px]"
+        >
+          {loading ? "Logging in..." : "Log In"}
+        </button>
+
+        <p className="text-center font-display text-[15px] text-[#737373] sm:text-[18px]">
+          Don&apos;t have an account?{" "}
+          <button onClick={onSignUp} className="text-[#60a5fa] hover:underline">Sign Up</button>
         </p>
       </div>
     </div>

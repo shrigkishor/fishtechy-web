@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Outfit, Poppins, Roboto } from "next/font/google";
+import { Providers } from "@/components/providers";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -67,7 +68,9 @@ export default function RootLayout({
       lang="en"
       className={`${outfit.variable} ${poppins.variable} ${roboto.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background text-foreground">{children}</body>
+      <body className="min-h-full bg-background text-foreground">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

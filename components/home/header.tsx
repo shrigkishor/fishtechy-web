@@ -18,7 +18,11 @@ const navItems = [
 ];
 
 export function Header() {
-  const [signUpOpen, setSignUpOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalView, setModalView] = useState<"signup" | "login">("signup");
+
+  const openSignUp = () => { setModalView("signup"); setModalOpen(true); };
+  const openLogin = () => { setModalView("login"); setModalOpen(true); };
 
   return (
     <>
@@ -60,12 +64,15 @@ export function Header() {
 
           <div className="ml-auto hidden shrink-0 items-center gap-3 sm:flex lg:gap-[19px]">
             <button
-              onClick={() => setSignUpOpen(true)}
+              onClick={openSignUp}
               className="inline-flex h-9 items-center justify-center rounded-[5px] border border-[#144b83] bg-[#144b83] px-5 text-[14px] font-medium text-white transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:h-10 sm:px-6 sm:text-[15px] lg:h-[40px] lg:w-[106px] lg:text-[16px]"
             >
               Sign Up
             </button>
-            <button className="inline-flex h-9 items-center justify-center rounded-[5px] border border-brand bg-transparent px-5 text-[14px] font-medium text-white transition-all hover:bg-brand/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:h-10 sm:px-6 sm:text-[15px] lg:h-[40px] lg:w-[106px] lg:text-[16px]">
+            <button
+              onClick={openLogin}
+              className="inline-flex h-9 items-center justify-center rounded-[5px] border border-brand bg-transparent px-5 text-[14px] font-medium text-white transition-all hover:bg-brand/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:h-10 sm:px-6 sm:text-[15px] lg:h-[40px] lg:w-[106px] lg:text-[16px]"
+            >
               Log in
             </button>
           </div>
@@ -74,7 +81,12 @@ export function Header() {
         </div>
       </header>
 
-      <SignUpModal open={signUpOpen} onClose={() => setSignUpOpen(false)} />
+      <SignUpModal
+        key={modalOpen ? modalView : "closed"}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        initialView={modalView}
+      />
     </>
   );
 }
